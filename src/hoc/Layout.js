@@ -2,6 +2,7 @@ import React, { Fragment, useState } from 'react';
 
 import Toolbar from '../components/Navigation/Toolbar/Toolbar';
 import SideDrawer from '../components/Navigation/SideDrawer/SideDrawer';
+import MenuButton from '../components/Navigation/MenuButton/MenuButton'
 
 const Layout = props => {
 
@@ -11,14 +12,15 @@ const Layout = props => {
         setShowSideDrawer(false);
     }
 
-    const sideDrawerOpenHandler = () => {
-        setShowSideDrawer(true);
+    const sideDrawerToggleHandler = () => {
+        setShowSideDrawer(currentState => !currentState);
     }
 
     return (
         <Fragment>
+            <MenuButton isOpened={showSideDrawer} show={sideDrawerToggleHandler} /> 
             <SideDrawer open={showSideDrawer} closed={sideDrawerClosedHandler}/>
-            <Toolbar opened={sideDrawerOpenHandler} />
+            <Toolbar opened={sideDrawerToggleHandler} />
         </Fragment>
     )
 

@@ -16,10 +16,14 @@ const animationTiming = {
     exit: 300
 }
 
-const backdrop = (props) => (
-    <CSSTransition in={props.show} unmountOnExit mountOnEnter timeout={animationTiming} classNames={animationClasses} >
-        <div onClick={props.clicked} className={classes.Backdrop} ></div>
-    </CSSTransition>
-);
+const Backdrop = (props) => {
 
-export default backdrop;
+    const nodeRef = React.createRef(null);
+
+    return (
+    <CSSTransition in={props.show} nodeRef={nodeRef} unmountOnExit timeout={animationTiming} classNames={animationClasses} >
+        <div ref={nodeRef} onClick={props.clicked} className={classes.Backdrop} ></div>
+    </CSSTransition>)
+};
+
+export default Backdrop;

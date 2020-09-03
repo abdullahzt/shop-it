@@ -5,11 +5,10 @@ import {Link} from 'react-router-dom';
 import Logo from '../../Logo/Logo';
 import NavigationItems from '../NavigationItems/NavigationItems';
 import NavigationItem from '../NavigationItems/NavigationItem/NavigationItem';
-import MenuButton from '../MenuButton/MenuButton';
 
 const Toolbar = props => (
     <header className={classes.Toolbar}>
-        <MenuButton show={props.opened} /> 
+        <div style={{width: "40px"}} className={classes.MobileOnly} ></div>
         <div className={classes.Logo} >
             <Link to="/">
                 <Logo />
