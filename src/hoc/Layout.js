@@ -21,6 +21,7 @@ const Layout = props => {
             <MenuButton isOpened={showSideDrawer} show={sideDrawerToggleHandler} /> 
             <SideDrawer open={showSideDrawer} closed={sideDrawerClosedHandler}/>
             <Toolbar opened={sideDrawerToggleHandler} />
+            {props.children}
         </Fragment>
     )
 

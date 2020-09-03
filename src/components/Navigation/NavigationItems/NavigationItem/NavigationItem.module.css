@@ -9,6 +9,7 @@
     font-weight: 400;
     position: relative;
     font-weight: 600;
+    font-family: Quicksand;
 }
 
 .NavigationItem a.active::after {
