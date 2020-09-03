@@ -1,0 +1,1 @@
+export const SET_HOME_IMAGES = 'SET_HOME_IMAGES';
