@@ -1,22 +1,19 @@
 import React from 'react';
-import ProductCard from '../../ProductCard/ProductCard';
 import classes from './ProductContainer.module.css';
 
-const data = {
-    name: "Macbook Air 2018",
-    price: "160000",
-    imageURL: "https://sm.mashable.com/t/mashable_pk/review/m/macbook-ai/macbook-air-2020-review-apple-gets-this-air-just-right_e1z9.960.jpg"
-}
+import ProductCard from '../../ProductCard/ProductCard';
+import ImageLoading from '../../UI/CustomLoading/ImageLoading';
 
 const productContainer = props => {
+
+    let products = (<ImageLoading />)
+
+    if (props.products) {
+        products = props.products.map(product => <ProductCard key={product.key} showSubData data={product} />)
+    }
     return ( 
         <div className={classes.ProductContainer} >
-            <ProductCard showSubData data={data} />
-            <ProductCard showSubData data={data} />
-            <ProductCard showSubData data={data} />
-            <ProductCard showSubData data={data} />
-            <ProductCard showSubData data={data} />
-            <ProductCard showSubData data={data} />
+            {products}
         </div>
     )
 }

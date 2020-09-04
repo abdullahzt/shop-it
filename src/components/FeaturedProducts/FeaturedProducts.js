@@ -7,8 +7,8 @@ const FeaturedProducts = props => {
 
     return (
         <div className={classes.FeaturedProducts} >
-            <h1>Featured Products</h1>
-            <ProductContainer/>
+            { props.products && <h1>Featured Products</h1>}
+            <ProductContainer products={props.products} />
         </div>
     )
 }

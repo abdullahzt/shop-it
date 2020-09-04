@@ -11,16 +11,17 @@ import axios from '../../axios-main';
 
 const Home = props => {
 
-    const {imageLinks, fetchHomeImages} = props;
+    const {imageLinks, fetchHomeImages, fetchFeaturedProducts} = props;
 
     useEffect(() => {
         fetchHomeImages()
-    }, [fetchHomeImages])
+        fetchFeaturedProducts()
+    }, [fetchHomeImages, fetchFeaturedProducts])
 
     return (
         <Fragment>
             {imageLinks ? <ImageSlider links={imageLinks}/> : <ImageLoading />}
-            <FeaturedProducts/>
+            <FeaturedProducts products={props.featuredProducts} />
         </Fragment>
     )
 }
@@ -28,7 +29,7 @@ const Home = props => {
 const mapStateToProps = state => {
     return {
         imageLinks: state.home.imageLinks,
-        error: state.home.error
+        featuredProducts: state.home.featuredProducts
     }
 }
 
@@ -36,6 +37,9 @@ const mapDispatchToProps = dispatch => {
     return {
         fetchHomeImages: () => dispatch(
             actions.fetchHomeImages()
+        ),
+        fetchFeaturedProducts: () => dispatch(
+            actions.fetchFeaturedProducts()
         )
     }
 }

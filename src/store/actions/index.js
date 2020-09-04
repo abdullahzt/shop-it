@@ -1,4 +1,5 @@
 export {
-    fetchHomeImages
+    fetchHomeImages,
+    fetchFeaturedProducts
 }
 from './home'
