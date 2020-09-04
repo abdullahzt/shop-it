@@ -12,7 +12,7 @@ const ImageSlider = props => {
     ))
 
     return (
-        <Carousel infiniteLoop autoPlay showArrows showThumbs={false}>
+        <Carousel infiniteLoop showArrows showThumbs={false}>
             {imageDivs}
         </Carousel>
     )

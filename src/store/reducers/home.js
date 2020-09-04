@@ -1,19 +1,19 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
-    imageLinks: null
+    imageLinks: null,
 }
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.SET_HOME_IMAGES:
-            return setHomeImages(action, state)
+            return setHomeImages(state, action)
         default:
             return state
     }
 }
 
-const setHomeImages = (action, state) => {
+const setHomeImages = (state, action) => {
     return {
         ...state,
         imageLinks: [
@@ -21,5 +21,6 @@ const setHomeImages = (action, state) => {
         ]
     }
 }
+
 
 export default reducer;

@@ -1,8 +1,8 @@
 import React, { Fragment, useState } from 'react';
 
-import Toolbar from '../components/Navigation/Toolbar/Toolbar';
-import SideDrawer from '../components/Navigation/SideDrawer/SideDrawer';
-import MenuButton from '../components/Navigation/MenuButton/MenuButton'
+import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
+import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
+import MenuButton from '../../components/Navigation/MenuButton/MenuButton'
 
 const Layout = props => {
 

@@ -1,11 +1,13 @@
 import React, { Fragment, useEffect } from 'react';
 
 import ImageSlider from '../../components/ImageSlider/ImageSlider';
-import CustomLoading from '../../components/UI/CustomLoading/CustomLoading'
+import FeaturedProducts from '../../components/FeaturedProducts/FeaturedProducts';
+import ImageLoading from '../../components/UI/CustomLoading/ImageLoading'
+import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/';
-// import axios from '../../axios';
+import axios from '../../axios-main';
 
 const Home = props => {
 
@@ -17,14 +19,16 @@ const Home = props => {
 
     return (
         <Fragment>
-            {imageLinks ? <ImageSlider links={imageLinks}/> : <CustomLoading />}
+            {imageLinks ? <ImageSlider links={imageLinks}/> : <ImageLoading />}
+            <FeaturedProducts/>
         </Fragment>
     )
 }
 
 const mapStateToProps = state => {
     return {
-        imageLinks: state.home.imageLinks
+        imageLinks: state.home.imageLinks,
+        error: state.home.error
     }
 }
 
@@ -36,4 +40,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(Home, axios));

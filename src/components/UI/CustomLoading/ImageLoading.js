@@ -8,13 +8,10 @@ const styles = {
     borderRadius: '15px'
 }
 
-const CustomLoading = props => (
+const ImageLoading = props => (
     <div>
         <Skeleton style={styles} height={'300px'} />
-        <Skeleton style={styles} height={'50px'} />
-        <Skeleton style={styles} height={'50px'} />
-        <Skeleton style={styles} height={'50px'} />
     </div>
 )
 
-export default CustomLoading;
+export default ImageLoading;
