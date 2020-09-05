@@ -6,3 +6,7 @@ export const FETCH_HOME_IMAGES_FAIL = 'FETCH_HOME_IMAGES_FAIL';
 // Featured Products
 
 export const SET_FEATURED_PRODUCTS = 'SET_FEATURED_PRODUCTS';
+
+// Browse
+
+export const SET_CATEGORIES = 'SET_CATEGORIES';

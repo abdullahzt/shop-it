@@ -3,3 +3,8 @@ export {
     fetchFeaturedProducts
 }
 from './home'
+
+export {
+    fetchCategories
+}
+from './browse'

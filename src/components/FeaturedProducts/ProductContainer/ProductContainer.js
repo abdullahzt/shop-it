@@ -12,9 +12,12 @@ const productContainer = props => {
         products = props.products.map(product => <ProductCard key={product.key} showSubData data={product} />)
     }
     return ( 
-        <div className={classes.ProductContainer} >
-            {products}
-        </div>
+        <>
+            <div className={classes.ProductContainer} >
+                {props.products && products}
+            </div>
+            {!props.products && products}
+        </>
     )
 }
 
