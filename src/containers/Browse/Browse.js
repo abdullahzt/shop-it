@@ -6,6 +6,8 @@ import * as actions from '../../store/actions/';
 
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 
+import Categories from '../../components/Categories/Categories';
+
 const Browse = props => {
 
     const { fetchCategories, categories } = props;
@@ -15,7 +17,7 @@ const Browse = props => {
     }, [fetchCategories])
 
     return (
-        <p>hello</p>
+        <Categories categories={categories} />
     )
 }
 

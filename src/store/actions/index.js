@@ -8,3 +8,8 @@ export {
     fetchCategories
 }
 from './browse'
+
+export {
+    fetchProduct
+}
+from './product';

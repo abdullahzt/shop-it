@@ -11,12 +11,14 @@ import thunk from 'redux-thunk';
 
 import homeReducer from './store/reducers/home';
 import browseReducer from './store/reducers/browse';
+import productReducer from './store/reducers/product';
 
 const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose
 
 const rootReducer = combineReducers({
   home: homeReducer,
-  browse: browseReducer
+  browse: browseReducer,
+  product: productReducer
 })
 
 const store = createStore(rootReducer, composeEnhancers(

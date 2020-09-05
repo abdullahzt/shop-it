@@ -8,7 +8,7 @@ const FeaturedProducts = props => {
     return (
         <div className={classes.FeaturedProducts} >
             { props.products && <h1>Featured Products</h1>}
-            <ProductContainer products={props.products} />
+            <ProductContainer buttonClick={props.buttonClick} products={props.products} />
         </div>
     )
 }

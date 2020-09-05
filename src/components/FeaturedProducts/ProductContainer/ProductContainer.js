@@ -1,5 +1,6 @@
 import React from 'react';
 import classes from './ProductContainer.module.css';
+import { withRouter } from 'react-router-dom';
 
 import ProductCard from '../../ProductCard/ProductCard';
 import ImageLoading from '../../UI/CustomLoading/ImageLoading';
@@ -9,7 +10,14 @@ const productContainer = props => {
     let products = (<ImageLoading />)
 
     if (props.products) {
-        products = props.products.map(product => <ProductCard key={product.key} showSubData data={product} />)
+        products = props.products.map(product => 
+            <ProductCard 
+                key={product.key} 
+                showSubData 
+                data={product} 
+                onButtonClick={props.buttonClick.bind(this, product.key)}
+            />
+            )
     }
     return ( 
         <>
@@ -21,4 +29,4 @@ const productContainer = props => {
     )
 }
 
-export default productContainer;
+export default withRouter(productContainer);

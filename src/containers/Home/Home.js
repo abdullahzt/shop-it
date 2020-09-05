@@ -18,10 +18,14 @@ const Home = props => {
         fetchFeaturedProducts()
     }, [fetchHomeImages, fetchFeaturedProducts])
 
+    const productButtonClick = (key) => {
+        props.history.push(`/product/${key}`)
+    }
+
     return (
         <Fragment>
             {imageLinks ? <ImageSlider links={imageLinks}/> : <ImageLoading />}
-            <FeaturedProducts products={props.featuredProducts} />
+            <FeaturedProducts buttonClick={productButtonClick} products={props.featuredProducts} />
         </Fragment>
     )
 }

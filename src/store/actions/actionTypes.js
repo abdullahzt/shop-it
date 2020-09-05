@@ -10,3 +10,8 @@ export const SET_FEATURED_PRODUCTS = 'SET_FEATURED_PRODUCTS';
 // Browse
 
 export const SET_CATEGORIES = 'SET_CATEGORIES';
+
+// Product
+
+export const SET_PRODUCT = 'SET_PRODUCT';
+export const SET_PRODUCT_LOADING = 'SET_PRODUCT_LOADING';
