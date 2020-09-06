@@ -4,6 +4,7 @@ import classes from './CategoriesContainer.module.css';
 
 import ImageLoading from '../../UI/CustomLoading/ImageLoading';
 import ProductCard from '../../ProductCard/ProductCard';
+import { Link } from 'react-router-dom';
 
 const categoriesContainer = props => {
 
@@ -12,7 +13,9 @@ const categoriesContainer = props => {
     if (props.categories) {
         categories = props.categories.map(category => (
             <div key={category.key} className={classes.CategoryCard} >
-                <ProductCard data={category} />
+                <Link to={`/browse/${category.name}`} >
+                    <ProductCard data={category} />
+                </Link>
             </div>
         ))
     }

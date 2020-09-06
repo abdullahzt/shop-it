@@ -4,10 +4,10 @@ import classes from './NavigationItems.module.css';
 
 const NavigationItems = props => (
     <ul className={classes.NavigationItems} >
-        <NavigationItem link={"/"}>Home</NavigationItem>
+        <NavigationItem exact link={"/"}>Home</NavigationItem>
         <NavigationItem link={"/browse"}>Browse</NavigationItem>
         <div className={classes.DesktopOnly} >
-            <NavigationItem link={"/auth"}>Login</NavigationItem>
+            <NavigationItem exact link={"/auth"}>Login</NavigationItem>
         </div>
     </ul>
 )
