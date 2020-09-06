@@ -16,6 +16,7 @@ from './product';
 
 export {
     auth,
-    checkAuthState
+    checkAuthState,
+    logout
 }
 from './auth';

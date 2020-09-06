@@ -20,7 +20,7 @@ const SideDrawer = props => {
                 <Logo/>
             </div>
             <nav onClick={props.closed} >
-                <NavigationItems isAuthenticated={props.isAuth} />
+                <NavigationItems isAuth={props.isAuth} />
             </nav>
             </div>
         </Fragment>

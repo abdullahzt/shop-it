@@ -42,7 +42,8 @@ const authSuccess = (state, action) => {
 const authFail = (state, action) => {
     return {
         ...state,
-        error: action.error
+        error: action.error,
+        loading: false
     }
 }
 

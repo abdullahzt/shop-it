@@ -1,3 +1,5 @@
+//Check validity helper function for forms
+
 export const checkValidity = (value, rules) => {
     let isValid = true;
     if (!rules) {
@@ -27,4 +29,12 @@ export const checkValidity = (value, rules) => {
     }
 
     return isValid;
+}
+
+// Firebase error messages
+
+export const errorMessage = {
+    EMAIL_NOT_FOUND: 'Oops! There is no account for this email!',
+    INVALID_PASSWORD: 'Sorry the password you entered is incorrect',
+    EMAIL_EXISTS: 'Oops! This Email is Already Taken'
 }

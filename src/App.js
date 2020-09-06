@@ -10,6 +10,7 @@ import Home from './containers/Home/Home';
 import Browse from './containers/Browse/Browse';
 import Product from './containers/Product/Product';
 import Auth from './containers/Auth/Auth';
+import Logout from './containers/Auth/Logout/Logout';
 
 const App = props => {
 
@@ -25,10 +26,17 @@ const App = props => {
       <Route path="/auth" exact component={Auth} />
         <Route path="/product/:id" exact component={Product} />
         <Route path="/browse" exact component={Browse} />
+        {props.isAuthenticated && <Route path="/logout" exact component={Logout} />}
         <Route path="/" exact component={Home} />
       </Switch>
     </Layout>
   );
+}
+
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.auth.token !== null
+  }
 }
 
 const mapDispatchToProps = dispatch => {
@@ -39,4 +47,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

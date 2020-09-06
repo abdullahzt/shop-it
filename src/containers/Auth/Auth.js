@@ -5,9 +5,13 @@ import { checkValidity } from '../../shared/utility';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
 import * as actions from '../../store/actions/';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
+import CircleLoader from '../../components/UI/CustomLoading/CircleLoader/CircleLoader';
+import ErrorBar from '../../components/UI/ErrorBar/ErrorBar';
+import { errorMessage } from '../../shared/utility';
 
 const animationClasses = {
     enter: classes["fade-enter"],
@@ -17,6 +21,8 @@ const animationClasses = {
 }
 
 const Auth = props => {
+
+    // STATE
 
     const [authForm, setAuthForm] = useState({
         email: {
@@ -52,6 +58,10 @@ const Auth = props => {
 
     const [isSignUp, setIsSignUp] = useState(false);
 
+    const [formIsValid, setFormIsValid] = useState(false);
+
+    // HANDLERS
+
     const switchAuthHandler = (event) => {
         event.preventDefault()
         setIsSignUp(isSignUp => !isSignUp);
@@ -69,6 +79,12 @@ const Auth = props => {
             }
         }
 
+        let formIsValid = true;
+        for (let inputIdentifier in updatedControls) {
+            formIsValid = updatedControls[inputIdentifier].valid && formIsValid;
+        }
+
+        setFormIsValid(formIsValid)
         setAuthForm(updatedControls)
 
     }
@@ -81,6 +97,8 @@ const Auth = props => {
             isSignUp
         )
     }
+
+    //LOGIC
 
     const formElementsArray = [];
 
@@ -105,25 +123,51 @@ const Auth = props => {
     ))
 
     const ref = React.createRef(null)
+    
+    let authRedirect = null;
+
+    if (props.isAuthenticated) {
+        authRedirect = <Redirect to="/" />
+    }
+
+    let displayForm = <CircleLoader />
+
+    if (!props.loading) {
+        displayForm = (
+            <React.Fragment>
+                {authRedirect}
+                { props.error && <ErrorBar>{errorMessage[props.error.message]}</ErrorBar>}
+                <h1>{isSignUp ? 'Create an account' : 'Sign in to Shop It'}</h1>
+                <h3>{isSignUp ? 'Already' : "Don't"} have an account? <a href="/" onClick={switchAuthHandler} >
+                        {isSignUp ? 'Sign in' : 'Sign up'}</a></h3>
+                <form onSubmit={formSubmitHandler}>
+                    {form}
+                    <div className={classes.Button} >
+                        <Button disabled={!formIsValid} >{isSignUp ? 'Sign up' : 'Log in'}</Button>
+                    </div>
+                </form>
+            </React.Fragment>
+        )
+    }
 
     return (
         <SwitchTransition mode={"out-in"} >
             <CSSTransition nodeRef={ref} timeout={0} key={isSignUp ? "Sign In" : "Sign Up"} classNames={animationClasses} >
                 <div ref={ref} className={classes.Auth} >
-                    <h1>{isSignUp ? 'Create an account' : 'Sign in to Shop It'}</h1>
-                    <h3>{isSignUp ? 'Already' : "Don't"} have an account? <a href="/" onClick={switchAuthHandler} >
-                        {isSignUp ? 'Sign in' : 'Sign up'}</a></h3>
-                    <form onSubmit={formSubmitHandler}>
-                    {form}
-                        <div className={classes.Button} >
-                            <Button>{isSignUp ? 'Sign up' : 'Log in'}</Button>
-                        </div>
-                    </form>
+                    {displayForm}
                 </div>
             </CSSTransition>
         </SwitchTransition>
     )
 
+}
+
+const mapStateToProps = state => {
+    return {
+        isAuthenticated: state.auth.token !== null,
+        loading: state.auth.loading,
+        error: state.auth.error
+    }
 }
 
 const mapDispatchToProps = dispatch => {
@@ -134,4 +178,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(Auth);
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);

@@ -15,11 +15,12 @@ const Toolbar = props => (
             </Link>
         </div>
         <nav className={classes.DesktopOnly} >
-            <NavigationItems />
+            <NavigationItems isAuth={props.isAuth} />
         </nav>
         <div className={classes.MobileOnly}>
             <div className={classes.Logout}>
-                <NavigationItem link={"/auth"}>Login</NavigationItem>
+                {!props.isAuth && <NavigationItem link={"/auth"}>Login</NavigationItem>}
+                {props.isAuth && <NavigationItem link={"/logout"}>Logout</NavigationItem>}
             </div>
         </div>
     </header>
