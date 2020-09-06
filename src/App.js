@@ -1,15 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import Layout from './hoc/Layout/Layout';
 
 import { Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as actions from './store/actions/';
 
 import Home from './containers/Home/Home';
 import Browse from './containers/Browse/Browse';
 import Product from './containers/Product/Product';
 import Auth from './containers/Auth/Auth';
 
-function App() {
+const App = props => {
+
+  const { checkAuthStatus } = props;
+
+  useEffect(() => {
+    checkAuthStatus();
+  }, [checkAuthStatus]) 
+
   return (
     <Layout>
       <Switch>
@@ -22,4 +31,12 @@ function App() {
   );
 }
 
-export default App;
+const mapDispatchToProps = dispatch => {
+  return {
+    checkAuthStatus: () => dispatch(
+      actions.checkAuthState()
+    )
+  }
+}
+
+export default connect(null, mapDispatchToProps)(App);

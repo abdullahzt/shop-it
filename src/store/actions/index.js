@@ -13,3 +13,9 @@ export {
     fetchProduct
 }
 from './product';
+
+export {
+    auth,
+    checkAuthState
+}
+from './auth';

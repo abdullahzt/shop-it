@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import classes from './Auth.module.css';
 import { checkValidity } from '../../shared/utility';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
+import * as actions from '../../store/actions/';
+import { connect } from 'react-redux';
 
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
@@ -73,6 +75,11 @@ const Auth = props => {
 
     const formSubmitHandler = (event) => {
         event.preventDefault()
+        props.authenticate(
+            authForm.email.value,
+            authForm.password.value,
+            isSignUp
+        )
     }
 
     const formElementsArray = [];
@@ -119,4 +126,12 @@ const Auth = props => {
 
 }
 
-export default Auth;
+const mapDispatchToProps = dispatch => {
+    return {
+        authenticate: (email, password, isSignUp) => dispatch(
+            actions.auth(email, password, isSignUp)
+        )
+    }
+}
+
+export default connect(null, mapDispatchToProps)(Auth);
