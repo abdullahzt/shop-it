@@ -127,7 +127,7 @@ const Checkout = props => {
             }
         }
 
-        props.onOrderStart(orderData)
+        props.onOrderStart(props.token, orderData)
 
     }
 
@@ -210,14 +210,15 @@ const mapStateToProps = state => {
         order: state.product.order,
         userID: state.auth.userID,
         loading: state.order.loading,
-        orderSuccess: state.order.orderSuccess
+        orderSuccess: state.order.orderSuccess,
+        token: state.auth.token
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        onOrderStart: (orderData) => dispatch(
-            actions.order(orderData)
+        onOrderStart: (token, orderData) => dispatch(
+            actions.order(token, orderData)
         )
     }
 }

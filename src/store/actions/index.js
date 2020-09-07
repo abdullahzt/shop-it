@@ -24,6 +24,7 @@ from './auth';
 
 export {
     order,
-    resetOrder
+    resetOrder,
+    fetchOrders
 }
 from './order';

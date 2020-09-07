@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './App.css';
 import Layout from './hoc/Layout/Layout';
 
@@ -12,20 +12,20 @@ import Product from './containers/Product/Product';
 import Auth from './containers/Auth/Auth';
 import Logout from './containers/Auth/Logout/Logout';
 import Checkout from './containers/Checkout/Checkout';
+import Orders from './containers/Orders/Orders';
 
 const App = props => {
 
   const { checkAuthStatus } = props;
 
-  useEffect(() => {
-    checkAuthStatus();
-  }, [checkAuthStatus]) 
+  checkAuthStatus() 
 
   return (
     <Layout>
       <Switch>
         <Route path="/auth" exact component={Auth} />
         <Route path="/product/:id" exact component={Product} />
+        {props.isAuthenticated && <Route path="/orders" exact component={Orders} />}
         <Route path="/browse" exact component={Browse} />
         {props.isAuthenticated && <Route path="/checkout" exact component={Checkout} />}
         {props.isAuthenticated && <Route path="/logout" exact component={Logout} />}

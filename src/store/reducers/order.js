@@ -14,8 +14,19 @@ const reducer = (state = initialState, action) => {
             return orderSuccess(state, action)
         case actionTypes.ORDER_RESET:
             return orderReset(state, action)
+        case actionTypes.SET_ORDERS:
+            return setOrders(state, action)
+        case actionTypes.FETCH_ORDERS_START:
+            return fetchOrdersStart(state, action)
         default:
             return state
+    }
+}
+
+const fetchOrdersStart = (state, action) => {
+    return {
+        ...state,
+        loading: true
     }
 }
 
@@ -39,6 +50,16 @@ const orderSuccess = (state, action) => {
         ...state,
         loading: false,
         orderSuccess: true
+    }
+}
+
+const setOrders = (state, action) => {
+    return {
+        ...state,
+        loading: false,
+        orders: [
+            ...action.orders
+        ]
     }
 }
 

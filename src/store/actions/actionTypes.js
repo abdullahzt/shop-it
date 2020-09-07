@@ -29,3 +29,5 @@ export const AUTH_LOGOUT = 'AUTH_LOGOUT';
 export const ORDER_START = 'ORDER_START';
 export const ORDER_SUCCESS = 'ORDER_SUCCESS';
 export const ORDER_RESET = 'ORDER_RESET';
+export const SET_ORDERS = 'SET_ORDERS';
+export const FETCH_ORDERS_START = 'FETCH_ORDERS_START';
