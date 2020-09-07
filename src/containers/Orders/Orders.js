@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
 import classes from './Orders.module.css';
@@ -6,14 +6,37 @@ import * as actions from '../../store/actions/';
 
 import ImageLoading from '../../components/UI/CustomLoading/ImageLoading';
 import Order from '../../components/Order/Order';
+import ConfirmationModal from '../../components/ConfirmationModal/ConfirmationModal';
 
 const Orders = props => {
 
     const { fetchOrders, token, userID, orders, loading } = props
 
+    const [showModal, setShowModal] = useState(false)
+
+    let orderIdToDelete = null;
+
     useEffect(() => {
         fetchOrders(token, userID)
     }, [ fetchOrders, token, userID ])
+
+    const cancelButtonTapped = orderID => {
+        setShowModal(true)
+        orderIdToDelete = orderID;
+    }
+
+    const onModalClose = () => {
+        setShowModal(false)
+    }
+
+    const onNoClick = () => {
+        setShowModal(false)
+    }
+
+    const onYesClick = () => {
+        setShowModal(false)
+        
+    }
 
     let displayOrders = (
         <React.Fragment>
@@ -22,7 +45,8 @@ const Orders = props => {
                     key={order.key}
                     name={order.productName}
                     quantity={order.quantity}
-                    price={order.totalPrice} 
+                    price={order.totalPrice}
+                    onCancelClick={cancelButtonTapped.bind(this, order.key)}
                 />
             ))}
         </React.Fragment>
@@ -38,6 +62,14 @@ const Orders = props => {
 
     return (
         <div className={classes.Orders} >
+            <ConfirmationModal
+                modalClosed={onModalClose} 
+                show={showModal}
+                onNoClick={onNoClick}
+                onYesClick={onYesClick}
+            >
+                Are you sure you want to cancel this order ?
+            </ConfirmationModal>
             {displayOrders}
         </div>
     )

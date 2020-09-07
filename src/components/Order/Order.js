@@ -7,7 +7,7 @@ const order = props => (
     <div className={classes.Order} >
         <h2>{props.name}</h2>
         <h2>X {props.quantity} -- PKR {props.price}</h2>
-        <Button>Cancel</Button>
+        <Button onClick={props.onCancelClick} >Cancel</Button>
     </div>
 )
 
