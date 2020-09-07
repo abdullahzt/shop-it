@@ -11,6 +11,7 @@ import Browse from './containers/Browse/Browse';
 import Product from './containers/Product/Product';
 import Auth from './containers/Auth/Auth';
 import Logout from './containers/Auth/Logout/Logout';
+import Checkout from './containers/Checkout/Checkout';
 
 const App = props => {
 
@@ -23,9 +24,10 @@ const App = props => {
   return (
     <Layout>
       <Switch>
-      <Route path="/auth" exact component={Auth} />
+        <Route path="/auth" exact component={Auth} />
         <Route path="/product/:id" exact component={Product} />
         <Route path="/browse" exact component={Browse} />
+        {props.isAuthenticated && <Route path="/checkout" exact component={Checkout} />}
         {props.isAuthenticated && <Route path="/logout" exact component={Logout} />}
         <Route path="/" exact component={Home} />
       </Switch>

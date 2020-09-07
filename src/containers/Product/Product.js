@@ -34,7 +34,7 @@ const Product = props => {
                 productID,
                 productName: product.name,
                 quantity: 1,
-                price: +product.price
+                totalPrice: +product.price
             })
 
             setPurchasing(true)
@@ -46,7 +46,7 @@ const Product = props => {
     const onMinusClick = () => {
         setOrder({
             ...order,
-            price: +order.price - +product.price,
+            totalPrice: +order.totalPrice - +product.price,
             quantity: order.quantity - 1
         })
     }
@@ -54,9 +54,13 @@ const Product = props => {
     const onPlusClick = () => {
         setOrder({
             ...order,
-            price: +order.price + +product.price,
+            totalPrice: +order.totalPrice + +product.price,
             quantity: order.quantity + 1
         })
+    }
+
+    const onCheckoutClick = () => {
+        props.history.push('/checkout')
     }
 
     let renderProduct = <ProductContainer onClick={onButtonClick} product={product} />
@@ -83,8 +87,8 @@ const Product = props => {
                     onMinusClick={onMinusClick}
                     onPlusClick={onPlusClick} 
                 />
-                <h3>Total Price: {order && order.price}</h3>
-                <Button>Checkout</Button>
+                <h3>Total Price: PKR {order && order.totalPrice}</h3>
+                <Button onClick={onCheckoutClick} >Checkout</Button>
             </React.Fragment>
         )
     }

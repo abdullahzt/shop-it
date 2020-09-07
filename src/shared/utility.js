@@ -36,5 +36,6 @@ export const checkValidity = (value, rules) => {
 export const errorMessage = {
     EMAIL_NOT_FOUND: 'Oops! There is no account for this email!',
     INVALID_PASSWORD: 'Sorry the password you entered is incorrect',
-    EMAIL_EXISTS: 'Oops! This Email is Already Taken'
+    EMAIL_EXISTS: 'Oops! This Email is Already Taken',
+    INVALID_EMAIL: 'Please Enter a valid Email address'
 }
