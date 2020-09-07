@@ -31,3 +31,4 @@ export const ORDER_SUCCESS = 'ORDER_SUCCESS';
 export const ORDER_RESET = 'ORDER_RESET';
 export const SET_ORDERS = 'SET_ORDERS';
 export const FETCH_ORDERS_START = 'FETCH_ORDERS_START';
+export const DELETE_ORDER = 'DELETE_ORDER';

@@ -10,11 +10,11 @@ import ConfirmationModal from '../../components/ConfirmationModal/ConfirmationMo
 
 const Orders = props => {
 
-    const { fetchOrders, token, userID, orders, loading } = props
+    const { fetchOrders, token, userID, orders, loading, deleteOrder } = props
 
     const [showModal, setShowModal] = useState(false)
 
-    let orderIdToDelete = null;
+    const [delOrderId, setDelOrderId] = useState(null) 
 
     useEffect(() => {
         fetchOrders(token, userID)
@@ -22,7 +22,7 @@ const Orders = props => {
 
     const cancelButtonTapped = orderID => {
         setShowModal(true)
-        orderIdToDelete = orderID;
+        setDelOrderId(orderID)
     }
 
     const onModalClose = () => {
@@ -35,7 +35,10 @@ const Orders = props => {
 
     const onYesClick = () => {
         setShowModal(false)
-        
+        if (delOrderId === null) {
+            return
+        }
+        deleteOrder(token, delOrderId)
     }
 
     let displayOrders = (
@@ -66,7 +69,7 @@ const Orders = props => {
                 modalClosed={onModalClose} 
                 show={showModal}
                 onNoClick={onNoClick}
-                onYesClick={onYesClick}
+                onYesClick={(onYesClick)}
             >
                 Are you sure you want to cancel this order ?
             </ConfirmationModal>
@@ -89,6 +92,9 @@ const mapDispatchToProps = dispatch => {
     return {
         fetchOrders: (token, userID) => dispatch(
             actions.fetchOrders(token, userID)
+        ),
+        deleteOrder: (token, orderID) => dispatch(
+            actions.deleteOrder(token, orderID)
         ) 
     }
 }

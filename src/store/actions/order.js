@@ -21,6 +21,10 @@ const fetchOrderStart = () => {
     return { type: actionTypes.FETCH_ORDERS_START }
 }
 
+const orderDelete = (orderID) => {
+    return { type: actionTypes.DELETE_ORDER, orderID }
+}
+
 export const fetchOrders = (token, userID) => {
     return dispatch => {
         dispatch(fetchOrderStart())
@@ -36,6 +40,19 @@ export const fetchOrders = (token, userID) => {
                 dispatch(setOrders(orders))
             })
             .catch(error => {})
+    }
+}
+
+export const deleteOrder = (token, orderID) => {
+    return dispatch => {
+        dispatch(orderStart())
+        axios.delete(`/orders/${orderID}.json?auth=${token}`)
+            .then(response => {
+                dispatch(orderDelete(orderID))
+            })
+            .catch(response => {
+
+            })
     }
 }
 

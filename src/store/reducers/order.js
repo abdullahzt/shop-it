@@ -18,6 +18,8 @@ const reducer = (state = initialState, action) => {
             return setOrders(state, action)
         case actionTypes.FETCH_ORDERS_START:
             return fetchOrdersStart(state, action)
+        case actionTypes.DELETE_ORDER:
+            return deleteOrder(state, action)
         default:
             return state
     }
@@ -60,6 +62,14 @@ const setOrders = (state, action) => {
         orders: [
             ...action.orders
         ]
+    }
+}
+
+const deleteOrder = (state, action) => {
+    return {
+        ...state,
+        loading: false,
+        orders: state.orders.filter(order => order.key !== action.orderID)
     }
 }
 
