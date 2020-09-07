@@ -11,7 +11,7 @@ const productContainer = props => {
                 <h1>{props.product.name}</h1>
                 <h2>Price: PKR {props.product.price}</h2>
                 <h2>{props.product.inStock ? "In Stock" : "Out of Stock"}</h2>
-                <Button disabled={!props.product.inStock} >Add To Cart</Button>
+                <Button onClick={props.onClick} disabled={!props.product.inStock} >Order Now</Button>
             </div>
             <div className={classes.ProductImage} >
                 <img src={props.product.imageURL} alt=""/>

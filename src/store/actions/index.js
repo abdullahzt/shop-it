@@ -10,7 +10,8 @@ export {
 from './browse'
 
 export {
-    fetchProduct
+    fetchProduct,
+    setOrder
 }
 from './product';
 

@@ -74,6 +74,7 @@
     transform: rotate(45deg);
     top: -3px;
     left: 8px;
+    /* z-index: ; */
 }
 
 .DrawerToggle.Open div:nth-child(2) {

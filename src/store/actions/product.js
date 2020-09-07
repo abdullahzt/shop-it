@@ -10,6 +10,10 @@ export const setProductLoading = (loading) => {
     return { type: actionTypes.SET_PRODUCT_LOADING, loading }
 }
 
+export const setOrder = (order) => {
+    return { type: actionTypes.SET_ORDER, order }
+}
+
 export const fetchProduct = (id) => {
     return dispatch => {
         dispatch(setProductLoading(true))

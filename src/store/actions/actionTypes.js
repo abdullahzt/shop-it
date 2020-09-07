@@ -15,6 +15,7 @@ export const SET_CATEGORIES = 'SET_CATEGORIES';
 
 export const SET_PRODUCT = 'SET_PRODUCT';
 export const SET_PRODUCT_LOADING = 'SET_PRODUCT_LOADING';
+export const SET_ORDER = 'SET_ORDER';
 
 // Auth
 
