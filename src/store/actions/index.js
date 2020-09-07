@@ -21,3 +21,9 @@ export {
     logout
 }
 from './auth';
+
+export {
+    order,
+    resetOrder
+}
+from './order';

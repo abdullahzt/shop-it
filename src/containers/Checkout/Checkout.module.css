@@ -16,6 +16,14 @@
     margin-bottom: 50px;
 }
 
+.OrderForm a {
+    color: black;
+}
+
+.FinalLoader h3 {
+    text-align: left;
+}
+
 .OrderSummary {
     text-align: left;
     margin-bottom: 10px;

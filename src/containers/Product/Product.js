@@ -60,6 +60,7 @@ const Product = props => {
     }
 
     const onCheckoutClick = () => {
+        props.resetOrder()
         props.history.push('/checkout')
     }
 
@@ -120,6 +121,9 @@ const mapDispatchToProps = dispatch => {
         ),
         setOrder: (order) => dispatch(
             actions.setOrder(order)
+        ),
+        resetOrder: () => dispatch(
+            actions.resetOrder()
         )
     }
 }

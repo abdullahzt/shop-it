@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 import { checkValidity } from '../../shared/utility';
 import classes from './Checkout.module.css';
+import * as actions from '../../store/actions/';
 
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
+import CheckMarkLoader from '../../components/UI/CustomLoading/CheckMarkLoader/CheckMarkLoader';
 
 const Checkout = props => {
 
@@ -112,6 +114,21 @@ const Checkout = props => {
 
     const onFormSubmit = (event) => {
         event.preventDefault()
+
+        let orderData = {
+            ...props.order,
+            userID: props.userID,
+            deliveryData: {
+                name: orderForm.name.value,
+                contact: orderForm.phone.value,
+                address1: orderForm.address1.value,
+                address2: orderForm.address2.value,
+                city: orderForm.city.value
+            }
+        }
+
+        props.onOrderStart(orderData)
+
     }
 
     // LOGIC
@@ -154,11 +171,9 @@ const Checkout = props => {
             </div>
         )
     }
-     
 
-    return (
-        <div className={classes.OrderForm} >
-            {redirect}
+    let finalForm = (
+        <>
             <h1>Checkout</h1>
             <form onSubmit={onFormSubmit} >
                 {form}
@@ -166,14 +181,45 @@ const Checkout = props => {
                 {orderSummary}
                 <Button disabled={!formIsValid} >Order</Button>
             </form>
+        </>
+    )
+
+    if (props.loading) {
+        finalForm = <CheckMarkLoader />
+    }
+     
+    if (props.orderSuccess) {
+        finalForm = (
+            <div className={classes.FinalLoader} >
+                <CheckMarkLoader check />
+                <h3>Your order has been successfully placed and will be delivered in 7 - 10 Business days. Please visit the <Link to="/orders" >Orders</Link> page to view your orders</h3>
+            </div>
+        )
+    }
+
+    return (
+        <div className={classes.OrderForm} >
+            {redirect}
+            {finalForm}
         </div>
     )
 }
 
 const mapStateToProps = state => {
     return {
-        order: state.product.order
+        order: state.product.order,
+        userID: state.auth.userID,
+        loading: state.order.loading,
+        orderSuccess: state.order.orderSuccess
     }
 }
 
-export default connect(mapStateToProps)(Checkout);
+const mapDispatchToProps = dispatch => {
+    return {
+        onOrderStart: (orderData) => dispatch(
+            actions.order(orderData)
+        )
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Checkout);
