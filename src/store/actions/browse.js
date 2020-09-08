@@ -6,6 +6,14 @@ export const setCategories = (categories) => {
     return { type: actionTypes.SET_CATEGORIES, data: categories }
 }
 
+export const setCategoryItems = (categoryItems) => {
+    return { type: actionTypes.SET_CATEGORY_ITEMS, categoryItems }
+}
+
+export const fetchCategoryItemsStart = () => {
+    return { type: actionTypes.FETCH_CATEGORY_ITEMS_START }
+}
+
 export const fetchCategories = () => {
     return dispatch => {
         axios.get('/categories.json')
@@ -20,5 +28,23 @@ export const fetchCategories = () => {
                 dispatch(setCategories(categories))
             })
             .catch(err => {})
+    }
+}
+
+export const fetchCategoryItems = (category) => {
+    return dispatch => {
+        dispatch(fetchCategoryItemsStart())
+        axios.get(`/products.json?orderBy="category"&equalTo="${category}"`)
+            .then(response => {
+                let categoryItems = []
+                for (let key in response.data) {
+                    categoryItems.push({
+                        key,
+                        ...response.data[key]
+                    })
+                }
+                dispatch(setCategoryItems(categoryItems))
+            })
+            .catch(error => {})
     }
 }

@@ -5,7 +5,8 @@ export {
 from './home'
 
 export {
-    fetchCategories
+    fetchCategories,
+    fetchCategoryItems
 }
 from './browse'
 

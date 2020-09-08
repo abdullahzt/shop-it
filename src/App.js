@@ -13,6 +13,7 @@ import Auth from './containers/Auth/Auth';
 import Logout from './containers/Auth/Logout/Logout';
 import Checkout from './containers/Checkout/Checkout';
 import Orders from './containers/Orders/Orders';
+import Category from './containers/Category/Category';
 
 const App = props => {
 
@@ -27,6 +28,7 @@ const App = props => {
         <Route path="/product/:id" exact component={Product} />
         {props.isAuthenticated && <Route path="/orders" exact component={Orders} />}
         <Route path="/browse" exact component={Browse} />
+        <Route path="/browse/:category" exact component={Category} />
         {props.isAuthenticated && <Route path="/checkout" exact component={Checkout} />}
         {props.isAuthenticated && <Route path="/logout" exact component={Logout} />}
         <Route path="/" exact component={Home} />
